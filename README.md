@@ -13,4 +13,4 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/Demetra404/ParserVacancyHH.git
+git clone https://github.com/Demetra404/JosevPeach.git
