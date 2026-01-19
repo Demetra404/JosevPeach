@@ -1,0 +1,44 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name_category": "телефон",
+        "description_category": "смартфон без кнопочек"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name_category": "ноутбуки",
+        "description_category": "греет как батарея зимой"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name_product": "iphone 11",
+        "description_product": "легенда",
+        "image_product": "",
+        "category_product": 1,
+        "price_product": 30000,
+        "created_at": "2026-01-15T09:48:29.622Z",
+        "update_at": "2026-01-15T10:15:26.504Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name_product": "Lenovo",
+        "description_product": "топ за свои деньги",
+        "image_product": "",
+        "category_product": 2,
+        "price_product": 100000,
+        "created_at": "2026-01-15T09:51:56.824Z",
+        "update_at": "2026-01-15T10:15:34.377Z"
+    }
+}
+]

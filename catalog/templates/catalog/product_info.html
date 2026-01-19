@@ -1,0 +1,11 @@
+{% extends 'catalog/base.html'%}
+{% block title %} Товар:{{product.name_product}}{% endblock %}
+{% block content %}
+{% include 'catalog/header.html' %}
+        <h1 class="text-center">Информация о товаре {{product.name_product}}</h1>
+        <img src='{{product.image_product}}' alt='{{product.name_product}}'>
+        <p>Название товара: {{product.name_product}}</p>
+        <p>Описание: {{product.description_product}}</p>
+        <p>В категории: {{product.category_product}}</p>
+        <p>Стоимость: {{product.price_product}}</p>
+{% endblock %}
