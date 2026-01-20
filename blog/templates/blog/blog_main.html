@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+{% block title %} Блог {% endblock %}
+{% block content %}
+{% include 'blog/header.html' %}
+  <h2>Список статей блога</h2>
+{% if blog_main %}
+  <ul class="list-group">
+    {% for page in blog_main %}
+      <li class="list-group-item">
+        <a href="{% url 'blog_detail' page.pk %}"> {{page.title_blog}}</a> - {{ page.content_blog|truncatechars:100}}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}
