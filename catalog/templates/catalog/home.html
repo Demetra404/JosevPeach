@@ -4,8 +4,10 @@
         {% include 'catalog/header.html'%}
         <h1 class="text-center">Главная</h1>
         <h6 class="text-center">Вы находитесь на сайте, предназначенном для продажи товаров</h6>
+
         <div class="row">
-            {% for product in products%}
+
+            {% for product in home %}
             <div class="col-4 p-4">
                 <div class="d-flex justify-content-center">
                 <div class="card" style="width: 14rem;">
@@ -13,7 +15,7 @@
                     <div class="card-body">
                         <h5 class="card-title w-100 text-center">{{product.price_product}} руб.</h5>
                         <p class="card-text">{{product.description_product|truncatechars:100 }}</p>
-                        <a href="{% url 'catalog:product_info' product.pk %}" class="btn btn-primary w-100">Посмотреть</a>
+                        <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-primary w-100">Посмотреть</a>
                     </div>
                 </div>
                 </div>
