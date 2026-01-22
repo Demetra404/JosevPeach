@@ -8,4 +8,6 @@
         <p>Описание: {{product.description_product}}</p>
         <p>В категории: {{product.category_product}}</p>
         <p>Стоимость: {{product.price_product}}</p>
+        <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+        <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-secondary">Редактировать</a>
 {% endblock %}
