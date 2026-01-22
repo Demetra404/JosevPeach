@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+{% block title %} Блог {% endblock %}
+{% block content %}
+{% include 'blog/header.html' %}
+    <div class="card" >
+    <img src="{{blog.image_blog}}" class="card-img-top figure-img img-fluid rounded" alt="{{blog.title_blog}}">
+    <div class="card-body post-body mb-5">
+        <h5 class="card-title text-center">{{blog.title_blog}}</h5>
+        <p class="card-text text-center">{{blog.content_blog}}</p>
+    </div>
+        <p>Просмотров: {{blog.views_blog}}</p>
+    </div>
+    <a href="{% url 'blog_delete' blog.pk %}" class="btn btn-danger">Удалить</a>
+    <a href="{% url 'blog_edit' blog.pk %}" class="btn btn-secondary">Редактировать</a>
+{% endblock %}
