@@ -1,3 +1,8 @@
 <header>
   <h2 class= "text-center mb-4">Генеральские котлы</h2>
+  {% if user.is_authenticated %}
+  <p> Добро пожаловать, {{ user.first_name }}!</p>
+  {% else %}
+  <p> Добро пожаловать на сайт</p>
+  {% endif %}
 </header>
