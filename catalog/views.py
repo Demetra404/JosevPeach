@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView
@@ -7,19 +8,21 @@ from .models import Product, Category
 
 # Create your views here.
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class =  ProductForm
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy('catalog:products')
 
-class ProductUpdateView(UpdateView):
+
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy('catalog:products')
 
-class ProductDeleteView(DeleteView):
+
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = 'catalog/product_delete.html'
     success_url = reverse_lazy('catalog:products')
@@ -39,3 +42,5 @@ class ContactsListView(ListView):
     context_object_name = 'contacts'
 #def contacts_view(request):
     #return render(request, 'catalog/contacts.html')
+
+
