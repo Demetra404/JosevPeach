@@ -8,10 +8,10 @@
         <p>Описание: {{product.description_product}}</p>
         <p>В категории: {{product.category_product}}</p>
         <p>Стоимость: {{product.price_product}}</p>
-{% if user == product.owner or perms.product.delete_product %}
+{% if user == product.owner or perms.catalog.delete_product %}
         <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
 {% endif %}
-{% if user == product.owner or perms.product.change_product%}
+{% if user == product.owner or perms.catalog.change_product%}
         <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-secondary">Редактировать</a>
 {% endif %}
 {% if "catalog.can_unpublish_product" in perms %}
