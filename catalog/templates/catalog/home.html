@@ -8,6 +8,7 @@
         <div class="row">
 
             {% for product in home %}
+            {% if product.publication_status %}
             <div class="col-4 p-4">
                 <div class="d-flex justify-content-center">
                 <div class="card" style="width: 14rem;">
@@ -20,6 +21,7 @@
                 </div>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
 {% endblock %}

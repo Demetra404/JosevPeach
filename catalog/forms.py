@@ -7,7 +7,7 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['name_product', 'description_product', 'category_product', 'price_product']
+        fields = ['name_product', 'description_product', 'category_product', 'price_product', 'publication_status', 'owner']
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
@@ -47,3 +47,4 @@ class ProductForm(forms.ModelForm):
         if int(price) <= 0:
             raise ValidationError('цене не может быть равна или меньше 0')
         return price
+
