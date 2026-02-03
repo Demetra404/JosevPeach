@@ -1,0 +1,8 @@
+{% extends 'catalog/base.html'%}
+{% block title %} Товар:{% endblock %}
+{% block content %}
+<h3 class="text-center">Список товаров в категории</h3>
+{% for product in products_in_category %}
+    <p class="text-center">{{product.name_product}}</p>
+{% endfor %}
+{% endblock %}

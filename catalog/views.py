@@ -1,12 +1,16 @@
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+from django.utils.decorators import method_decorator
 from django.http import HttpResponse, HttpResponseForbidden
 from django.views.generic import View
 from django.shortcuts import get_object_or_404,redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.shortcuts import render
+#from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView
 from django.views.generic import CreateView, DeleteView
 from .forms import ProductForm
+from .services import ProductService
 from .models import Product, Category
 
 # Create your views here.
@@ -51,14 +55,23 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
             return HttpResponseForbidden("Вы не можете удалить продукт")
         return super().dispatch(request, *args, **kwargs)
 
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_info.html'
     context_object_name = 'product'
+
 class HomeListView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'catalog/home.html'
     context_object_name = 'home'
+
+    def get_queryset(self):
+        queryset = cache.get('home_queryset')
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set('home_queryset', queryset, 60*15)
+        return queryset
 
 class ContactsListView(ListView):
     model = Category # как заглушка
@@ -77,7 +90,32 @@ class UnpublishProductView(LoginRequiredMixin, View):
         product.save()
 
         return redirect('catalog:product_detail', pk=pk)
+'''
+class ProductsListView(LoginRequiredMixin, ListView):
+    model = Category
+    template_name = 'catalog/products_list.html'
+    context_object_name = 'products'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        all_categories = Category.objects.all()
+        dfs = []
+        for category in all_categories:
+            dfs.append(ProductService.products_in_category(category))
+        context['list_products'] = dfs
+        return context
+'''
+
+class ProductsListView(ListView):
+    model = Product
+    template_name = 'catalog/products_list.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs.get('category_id')
+        context['products_in_category'] = ProductService.get_products_in_category(category_id)
+        return context
 
 
 
